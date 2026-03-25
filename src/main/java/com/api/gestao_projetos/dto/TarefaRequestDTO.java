@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record TarefaRequestDTO(
-        Long id,
         @NotBlank
         @Size(min = 5, message = "Titulo não pode ser vazio e precisa ter no mínimo 5 caracteres")
         String titulo,

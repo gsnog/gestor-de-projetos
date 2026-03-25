@@ -3,6 +3,8 @@ package com.api.gestao_projetos.controller;
 import com.api.gestao_projetos.dto.TarefaRequestDTO;
 import com.api.gestao_projetos.dto.TarefaResponseDTO;
 import com.api.gestao_projetos.service.TarefaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +43,9 @@ public class TarefaController {
         }
     }
 
+    @Operation(summary = "Conclui uma tarefa")
+    @ApiResponse(responseCode = "200", description = "Tarefa concluída com sucesso")
+    @ApiResponse(responseCode = "404", description = "Tarefa não encontrada")
     @PutMapping("/{id}/concluir")
     public ResponseEntity<TarefaResponseDTO> atualizarStatus(@PathVariable Long id){
         try {
@@ -55,7 +60,7 @@ public class TarefaController {
     public ResponseEntity<Void> deletarTarefa (@PathVariable Long id){
         try {
             tarefaService.deletar(id);
-            return ResponseEntity.status(HttpStatus.OK).build();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

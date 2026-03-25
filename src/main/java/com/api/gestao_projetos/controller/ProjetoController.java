@@ -55,7 +55,7 @@ public class ProjetoController {
     public ResponseEntity<Void> deletarProjeto (@PathVariable Long id){
         try {
             projetoService.deletarProjeto(id);
-            return ResponseEntity.status(HttpStatus.OK).build();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
